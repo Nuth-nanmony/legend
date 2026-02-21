@@ -289,7 +289,7 @@ footer{border-top:1px solid var(--border);padding:26px 44px;display:flex;align-i
       <div class="form-grid">
         <div class="fg full"><label class="flabel">Title — English <span class="req">✦</span></label><input class="finput" id="fTitle" type="text" placeholder="e.g. The Dark Knight" required></div>
         <div class="fg full"><label class="flabel">Title — <span class="khs">ចំណងជើងខ្មែរ</span></label><input class="finput" id="fTitleKh" type="text" placeholder="ចំណងជើងជាភាសាខ្មែរ (optional)"></div>
-        <div class="fg"><label class="flabel">Year <span class="req">✦</span></label><input class="finput" id="fYear" type="number" min="1900" max="2099" placeholder="2025" required></div>
+        <div class="fg"><label class="flabel">Year <span class="req">✦</span></label><input class="finput" id="fYear" type="date" required></div>
         <div class="fg"><label class="flabel">Genre <span class="req">✦</span></label>
           <select class="fselect" id="fGenre" required>
             <option value="" disabled selected>Select genre</option>
@@ -557,7 +557,9 @@ async function submitMovie(e){
     const payload={
       title:       document.getElementById('fTitle').value.trim(),
       title_kh:    document.getElementById('fTitleKh').value.trim()||null,
-      year:        document.getElementById('fYear').value||null,
+      year: document.getElementById('fYear').value 
+        ? new Date(document.getElementById('fYear').value).getFullYear()
+        : null,
       genre:       document.getElementById('fGenre').value||null,
       duration_min:document.getElementById('fDuration').value||null,
       rating:      document.getElementById('fRating').value||null,
