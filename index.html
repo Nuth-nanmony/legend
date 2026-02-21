@@ -354,8 +354,19 @@ let movies=[], lang='en', filterGenre='All', filterLang='All', pickedFile=null;
 const fmtDur = m => { m=parseInt(m); if(!m||isNaN(m))return null; const h=Math.floor(m/60),r=m%60; return h===0?`${r}min`:r===0?`${h}h`:`${h}h ${r}min`; };
 const stars  = r => { const n=Math.round(parseFloat(r||0)/2); return '★'.repeat(Math.min(n,5))+'☆'.repeat(Math.max(0,5-n)); };
 function parseShowtimes(raw) {
-  if(!raw)return[];
-  return raw.split(',').map(p=>{p=p.trim();const sp=p.indexOf(' ');if(sp===-1)return null;return{date:p.slice(0,sp),times:p.slice(sp+1).split('|').map(t=>t.trim()).filter(Boolean));}).filter(Boolean);
+  if (!raw) return [];
+  return raw.split(',').map(p => {
+    p = p.trim();
+    const sp = p.indexOf(' ');
+    if (sp === -1) return null;
+    return {
+      date: p.slice(0, sp),
+      times: p.slice(sp + 1)
+        .split('|')
+        .map(t => t.trim())
+        .filter(Boolean)
+    };
+  }).filter(Boolean);
 }
 function fmtDate(s){try{const d=new Date(s+'T00:00:00');return{en:d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}),kh:d.toLocaleDateString('km-KH',{weekday:'short',month:'short',day:'numeric'})};}catch{return{en:s,kh:s};}}
 function showToast(msg,type='ok'){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${type} show`;setTimeout(()=>t.className='toast',3200);}
