@@ -205,7 +205,7 @@ footer{border-top:1px solid var(--border);padding:26px 44px;display:flex;align-i
 <div class="filmstrip"></div>
 
 <header>
-  <a class="logo" href="#"><span class="logo-en">Legend</span><span class="logo-kh">រឿងភាគ &amp; ភាពយន្ត</span></a>
+  <a class="logo" href="#"><span class="logo-en">Legend</span><span class="logo-kh">Movie Detail</span></a>
   <div class="hd-mid">
     <div class="search-wrap">
       <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -229,7 +229,7 @@ footer{border-top:1px solid var(--border);padding:26px 44px;display:flex;align-i
   <div class="hero-badge" id="heroBadge">Now Showing</div>
   <h1 class="hero-title"><strong>Legend</strong> — <em>Now Showing</em></h1>
   <p class="hero-sub" id="heroEn">Browse the latest films, check showtimes, and share with friends — updated live.</p>
-  <p class="hero-sub-kh" id="heroKh">រុករកភាពយន្តថ្មីៗ ពិនិត្យម៉ោង放映 ហើយចែករំលែកជាមួយមិត្តភក្តិ។</p>
+  <p class="hero-sub-kh" id="heroKh">រុករកភាពយន្តថ្មីៗ ពិនិត្យម៉ោង ហើយចែករំលែក។</p>
 </section>
 
 <div class="filter-bar">
@@ -461,7 +461,7 @@ function openDetail(m){
     ?`<img src="${m.poster_url}" alt="${m.title}" onerror="this.outerHTML='<div class=modal-img-none>🎬</div>'"><div class="modal-img-fade"></div>`
     :`<div class="modal-img-none">🎬</div>`;
   let stHTML='';
-  if(sts.length){stHTML=`<div class="m-div"></div><div class="m-label" ${isKh?'style="display:none"':''}>Showtimes</div><div class="m-label-kh" ${isKh?'style="display:block"':''}>ម៉ោង放映</div><div class="showtimes">${sts.map(s=>{const fd=fmtDate(s.date);return`<div class="st-day"><div class="st-date"><span ${isKh?'style="display:none"':''}>${fd.en}</span><span style="${isKh?'display:block':'display:none'};font-family:var(--kh);font-size:.72rem;color:var(--text3)">${fd.kh}</span></div><div class="st-times">${s.times.map(t=>`<div class="st-chip">🕐 ${t}</div>`).join('')}</div></div>`;}).join('')}</div>`;}
+  if(sts.length){stHTML=`<div class="m-div"></div><div class="m-label" ${isKh?'style="display:none"':''}>Showtimes</div><div class="m-label-kh" ${isKh?'style="display:block"':''}>ម៉ោងបញ្ចាំង</div><div class="showtimes">${sts.map(s=>{const fd=fmtDate(s.date);return`<div class="st-day"><div class="st-date"><span ${isKh?'style="display:none"':''}>${fd.en}</span><span style="${isKh?'display:block':'display:none'};font-family:var(--kh);font-size:.72rem;color:var(--text3)">${fd.kh}</span></div><div class="st-times">${s.times.map(t=>`<div class="st-chip">🕐 ${t}</div>`).join('')}</div></div>`;}).join('')}</div>`;}
   document.getElementById('detailBody').innerHTML=`
     <div class="m-genre">${m.genre||''}</div>
     <div class="m-title" ${isKh?'style="display:none"':''}>${m.title}</div>
@@ -597,7 +597,7 @@ function resetForm(){
 function setLang(l,btn){
   lang=l;const kh=l==='kh';
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  document.getElementById('heroBadge').textContent=kh?'ឥឡូវរាត់បញ្ចាំង':'Now Showing';
+  document.getElementById('heroBadge').textContent=kh?'ឥឡូវកំពុងបញ្ចាំង':'Now Showing';
   document.getElementById('heroEn').style.display=kh?'none':'block';
   document.getElementById('heroKh').style.display=kh?'block':'none';
   document.getElementById('lblGenre').textContent=kh?'ប្រភេទ':'Genre';
